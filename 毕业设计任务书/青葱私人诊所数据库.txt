@@ -1,0 +1,127 @@
+PrivateClinic 私人诊所
+
+
+Customer 客户信息表
+
+CusID 客户ID
+CusName 姓名
+CusCard 身份证
+CusSex 性别
+CusBirth 出生年月
+CusNation 民族
+CusMarriage 婚姻状况
+CusAddress 家庭住址
+CusTelephone 联系电话
+CusEmergency 紧急联系电话
+CusOccupation 职业
+CusBloodType 血型
+CusCulture文化程度
+CusDoctor主治医生
+
+
+MedicalHistory 病史信息表
+
+病史ID
+病史类别
+发生时间
+就诊地点
+病史概况
+CusID用户外键
+
+Appointment 客户预约表
+
+AppID 预约ID
+AppName 姓名
+AppDate 日期
+AppStart 开始时间
+AppEnd 结束时间
+AppIsomorphism 体检类容描述
+
+
+Inspect 体检信息表
+
+InID 编号
+InDoctor 主治医生
+InName 体检人
+InTime 检查时间
+
+
+Surgery外科信息表
+
+SurID外科编号
+SurHeight身高
+SurBust胸围
+SurSkin皮肤
+SurWeight体重
+SurBreathing呼吸差
+SurFace面部
+SurNeck颈部
+SurSpine脊柱
+SurLimb四肢
+SurJoint关节
+SurOther其他
+InID 体检信息外键
+
+Internal内科信息表
+
+InterID 内科编号
+InterBlood 血压
+InterPulse 脉搏
+InterDeve 发育及营养状况
+InterHeart 心脏及血管
+InterNerve 神经及精神
+InterLung 肺及呼吸道
+InterAbdomen 腹部器官
+InterLiver 肝
+InterSpleen 脾
+InterRansamin 转氨酶
+InterDescribe 转氨酶描述
+InterHepatitis 乙肝表面抗原
+InterHeDescri 乙肝表面抗原描述
+InterChest 胸部透视
+InID 体检信息外键
+
+Conclusion 结论表
+ConID 结论编号
+ConConclu 体检结论
+ConDescribe 体检信息描述
+InID 体检信息外键
+
+Consultation 咨询表
+ConsuID 咨询编号
+ConsuName 客户姓名
+ConsuContent 咨询内容
+ConsuProposal 医生建议
+ConsuTime 咨询时间
+ConsuFill 填写人
+
+ReturnVisit 回访表
+RetID 回访编号
+RetName 客户姓名
+RetType 回访类型
+RetIsomorphism 回访类容
+RetResult 回访结果
+RetTime 回访时间
+RetPeople 回访人
+
+KnowledgeBase 知识库表
+
+KnowID 知识库编号
+KnowCommon 常见问题
+KnowType 问题类型
+KnowAnswer 解答
+KnowAdd 添加时间
+KnowPeople 添加人
+
+UserInfo 用户信息表
+
+UserID 用户编号
+UserName 姓名
+UserGood 擅长
+UserLogin 登录名
+UserPwd 密码
+UserBirth 出生年月
+UserSex 性别
+UserQua 资质信息
+
+
