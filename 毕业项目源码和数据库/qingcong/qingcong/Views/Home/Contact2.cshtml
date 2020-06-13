@@ -1,0 +1,86 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery后台管理系统可折叠左侧导航菜单特效</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <style>
+        .navbar-default {
+            background-color: #e1e9ff;
+        }
+
+        #wrapper .sidebar {
+            background-color: #125b70;
+        }
+
+        .side {
+            background-color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <!-- NAVBAR -->//
+        <nav class="navbar navbar-default navbar-fixed-top baclass">
+            <div class="brand"> <a href=""><img src="~/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a> </div>
+            <div class="container-fluid">
+                <div class="navbar-btn" style="padding: 0; padding-top: 10px;">
+                    <button type="button" class="btn-toggle-fullwidth btn-toggle-mx"><img src="~/img/left.png" height="40" alt=""></button>
+                </div>
+            </div>
+        </nav>
+        <!-- END NAVBAR -->
+        <!--_________________________________________________________________________________________-->
+        <!-- LEFT SIDEBAR -->
+        <div id="sidebar-nav" class="sidebar ">
+            <div class="sidebar-scroll">
+                <nav class="side">
+                    <ul class="nav">
+                        <li><a href="" target="_blank" class="iframe_link active"><span>选择器</span></a></li>
+                        <li><a href="" target="_blank" class="iframe_link"><span>层次选择器</span></a></li>
+                        <li>
+                            <a href="javascript:;" class="nav-togg">
+                                <span>搭建方法</span> <svg class="bi bi-chevron-down " width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </a>
+                            <div>
+                                <ul>
+                                    <li><a href="" target="_blank" class="iframe_link"><span>打包</span></a></li>
+                                    <li><a href="" target="_blank" class="iframe_link"><span>啪啪</span></a></li>
+                                    <li><a href="" target="_blank" class="iframe_link"><span>打包</span></a></li>
+                                    <li><a href="" target="_blank" class="iframe_link"><span>啪啪</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-content" style="height: 100%;">
+                <iframe src="" class="iframe_mx uicss-cn"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/klorofil-common.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</body>
+</html>
