@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5a5f356384b4c7c968db4caec69c336" Name="Diagram1">
+        <EntityTypeShape EntityType="PrivateClinicModel.Appointment" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Conclusion" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Customer" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Inspect" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Internal" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.KnowledgeBase" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.MedicalHistory" Width="1.5" PointX="8" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.ReturnVisit" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Surgery" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.UserInfo" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Conclusion_Inspect" ManuallyRouted="false" />
+        <AssociationConnector Association="PrivateClinicModel.FK_MedicalHistory_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Internal_Inspect" ManuallyRouted="false" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Surgery_Inspect" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
