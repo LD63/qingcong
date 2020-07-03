@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PrivateClinicModelStoreContainer" CdmEntityContainer="PrivateClinicEntities">
+    <EntitySetMapping Name="Appointment">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Appointment">
+        <MappingFragment StoreEntitySet="Appointment">
+          <ScalarProperty Name="AppDD" ColumnName="AppDD" />
+          <ScalarProperty Name="AppID" ColumnName="AppID" />
+          <ScalarProperty Name="AppName" ColumnName="AppName" />
+          <ScalarProperty Name="AppDate" ColumnName="AppDate" />
+          <ScalarProperty Name="AppStart" ColumnName="AppStart" />
+          <ScalarProperty Name="AppEnd" ColumnName="AppEnd" />
+          <ScalarProperty Name="AppIsomorphism" ColumnName="AppIsomorphism" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conclusion">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Conclusion">
+        <MappingFragment StoreEntitySet="Conclusion">
+          <ScalarProperty Name="ConID" ColumnName="ConID" />
+          <ScalarProperty Name="ConConclu" ColumnName="ConConclu" />
+          <ScalarProperty Name="ConDescribe" ColumnName="ConDescribe" />
+          <ScalarProperty Name="InID" ColumnName="InID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReturnVisit">
+      <EntityTypeMapping TypeName="PrivateClinicModel.ReturnVisit">
+        <MappingFragment StoreEntitySet="ReturnVisit">
+          <ScalarProperty Name="RetID" ColumnName="RetID" />
+          <ScalarProperty Name="RetName" ColumnName="RetName" />
+          <ScalarProperty Name="RetType" ColumnName="RetType" />
+          <ScalarProperty Name="RetIsomorphism" ColumnName="RetIsomorphism" />
+          <ScalarProperty Name="Resul" ColumnName="Resul" />
+          <ScalarProperty Name="RetTime" ColumnName="RetTime" />
+          <ScalarProperty Name="RetPeople" ColumnName="RetPeople" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PrivateClinicModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KnowledgeBase">
+      <EntityTypeMapping TypeName="PrivateClinicModel.KnowledgeBase">
+        <MappingFragment StoreEntitySet="KnowledgeBase">
+          <ScalarProperty Name="KnowPeople" ColumnName="KnowPeople" />
+          <ScalarProperty Name="KnowAdd" ColumnName="KnowAdd" />
+          <ScalarProperty Name="KnowAnswer" ColumnName="KnowAnswer" />
+          <ScalarProperty Name="KnowType" ColumnName="KnowType" />
+          <ScalarProperty Name="KnowCommon" ColumnName="KnowCommon" />
+          <ScalarProperty Name="KnowID" ColumnName="KnowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Family">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Family">
+        <MappingFragment StoreEntitySet="Family">
+          <ScalarProperty Name="FCusID" ColumnName="FCusID" />
+          <ScalarProperty Name="FamSurvey" ColumnName="FamSurvey" />
+          <ScalarProperty Name="FamPlace" ColumnName="FamPlace" />
+          <ScalarProperty Name="FamTime" ColumnName="FamTime" />
+          <ScalarProperty Name="FamCategory" ColumnName="FamCategory" />
+          <ScalarProperty Name="FamID" ColumnName="FamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marriage">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Marriage">
+        <MappingFragment StoreEntitySet="Marriage">
+          <ScalarProperty Name="RCusID" ColumnName="RCusID" />
+          <ScalarProperty Name="MarSurvey" ColumnName="MarSurvey" />
+          <ScalarProperty Name="MarPlace" ColumnName="MarPlace" />
+          <ScalarProperty Name="MarTime" ColumnName="MarTime" />
+          <ScalarProperty Name="MarCategory" ColumnName="MarCategory" />
+          <ScalarProperty Name="MarID" ColumnName="MarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menstrual">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Menstrual">
+        <MappingFragment StoreEntitySet="Menstrual">
+          <ScalarProperty Name="SCusID" ColumnName="SCusID" />
+          <ScalarProperty Name="MenSurvey" ColumnName="MenSurvey" />
+          <ScalarProperty Name="MenPlace" ColumnName="MenPlace" />
+          <ScalarProperty Name="MenTime" ColumnName="MenTime" />
+          <ScalarProperty Name="MenCategory" ColumnName="MenCategory" />
+          <ScalarProperty Name="MenID" ColumnName="MenID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Present">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Present">
+        <MappingFragment StoreEntitySet="Present">
+          <ScalarProperty Name="PCusID" ColumnName="PCusID" />
+          <ScalarProperty Name="PreSurvey" ColumnName="PreSurvey" />
+          <ScalarProperty Name="PrePlace" ColumnName="PrePlace" />
+          <ScalarProperty Name="PreTime" ColumnName="PreTime" />
+          <ScalarProperty Name="PreCategory" ColumnName="PreCategory" />
+          <ScalarProperty Name="PreID" ColumnName="PreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CusDoctor" ColumnName="CusDoctor" />
+          <ScalarProperty Name="CusBloodType" ColumnName="CusBloodType" />
+          <ScalarProperty Name="CusOccupation" ColumnName="CusOccupation" />
+          <ScalarProperty Name="CusTelephone" ColumnName="CusTelephone" />
+          <ScalarProperty Name="CusAddress" ColumnName="CusAddress" />
+          <ScalarProperty Name="CusNation" ColumnName="CusNation" />
+          <ScalarProperty Name="CusMarriage" ColumnName="CusMarriage" />
+          <ScalarProperty Name="CusBirth" ColumnName="CusBirth" />
+          <ScalarProperty Name="CusSex" ColumnName="CusSex" />
+          <ScalarProperty Name="CusCard" ColumnName="CusCard" />
+          <ScalarProperty Name="CusName" ColumnName="CusName" />
+          <ScalarProperty Name="CusID" ColumnName="CusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicalHistory">
+      <EntityTypeMapping TypeName="PrivateClinicModel.MedicalHistory">
+        <MappingFragment StoreEntitySet="MedicalHistory">
+          <ScalarProperty Name="MCusID" ColumnName="MCusID" />
+          <ScalarProperty Name="MedSurvey" ColumnName="MedSurvey" />
+          <ScalarProperty Name="MedPlace" ColumnName="MedPlace" />
+          <ScalarProperty Name="MedTime" ColumnName="MedTime" />
+          <ScalarProperty Name="MedCategory" ColumnName="MedCategory" />
+          <ScalarProperty Name="MedID" ColumnName="MedID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inspect">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Inspect">
+        <MappingFragment StoreEntitySet="Inspect">
+          <ScalarProperty Name="ConDescribe" ColumnName="ConDescribe" />
+          <ScalarProperty Name="ConConclu" ColumnName="ConConclu" />
+          <ScalarProperty Name="InTime" ColumnName="InTime" />
+          <ScalarProperty Name="InName" ColumnName="InName" />
+          <ScalarProperty Name="InDoctor" ColumnName="InDoctor" />
+          <ScalarProperty Name="InID" ColumnName="InID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Internal">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Internal">
+        <MappingFragment StoreEntitySet="Internal">
+          <ScalarProperty Name="DInID" ColumnName="DInID" />
+          <ScalarProperty Name="InterChest" ColumnName="InterChest" />
+          <ScalarProperty Name="InterSpleen" ColumnName="InterSpleen" />
+          <ScalarProperty Name="InterLiver" ColumnName="InterLiver" />
+          <ScalarProperty Name="InterAbdomen" ColumnName="InterAbdomen" />
+          <ScalarProperty Name="InterLung" ColumnName="InterLung" />
+          <ScalarProperty Name="InterNerve" ColumnName="InterNerve" />
+          <ScalarProperty Name="InterHeart" ColumnName="InterHeart" />
+          <ScalarProperty Name="InterPulse" ColumnName="InterPulse" />
+          <ScalarProperty Name="InterBlood" ColumnName="InterBlood" />
+          <ScalarProperty Name="InterID" ColumnName="InterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Surgery">
+      <EntityTypeMapping TypeName="PrivateClinicModel.Surgery">
+        <MappingFragment StoreEntitySet="Surgery">
+          <ScalarProperty Name="SInID" ColumnName="SInID" />
+          <ScalarProperty Name="SurOther" ColumnName="SurOther" />
+          <ScalarProperty Name="SurJoint" ColumnName="SurJoint" />
+          <ScalarProperty Name="SurLimb" ColumnName="SurLimb" />
+          <ScalarProperty Name="SurSpine" ColumnName="SurSpine" />
+          <ScalarProperty Name="SurNeck" ColumnName="SurNeck" />
+          <ScalarProperty Name="SurFace" ColumnName="SurFace" />
+          <ScalarProperty Name="SurWeight" ColumnName="SurWeight" />
+          <ScalarProperty Name="SurBust" ColumnName="SurBust" />
+          <ScalarProperty Name="SurHeight" ColumnName="SurHeight" />
+          <ScalarProperty Name="SurID" ColumnName="SurID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="PrivateClinicModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="UserQua" ColumnName="UserQua" />
+          <ScalarProperty Name="UserSex" ColumnName="UserSex" />
+          <ScalarProperty Name="UserBirth" ColumnName="UserBirth" />
+          <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="UserPicture" ColumnName="UserPicture" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>青葱私人诊所登录系统</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <style>
+        label.error {
+            color: red;
+        }
+    </style>
+    <!--<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    -->
+    <!-- For-Mobile-Apps-and-Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Simple Login Form Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //For-Mobile-Apps-and-Meta-Tags -->
+
+</head>
+
+<body>
+    <h1>青葱私人诊所登录系统</h1>
+    <div class="container w3">
+        <h2>现在登录</h2>
+        <form action="/Login/Index" method="post" id="LoginForm">
+            <div class="username ">
+                <span class="username us" style="height:19px">用户:</span>
+                <input type="text" class="name " placeholder="" required="required" name="UserLogin" id="UserLogin">
+                @*<div class="clear">111</div>*@
+            </div>
+            <div class="password-agileits us">
+                <span class="username us" style="height:19px">密码:</span>
+                <input type="password" class="password us" placeholder="" name="UserPwd" id="UserPwd">
+                @*<div class="clear"></div>*@
+            </div>
+            <div class="password-agileits us">
+                <span class="username" style="height:19px">验证码:</span>
+                <input type="text" class="yzm" placeholder="" required="" name="Yzm" id="Yzm">
+                <img src="~/Handlel/YzmHandler.ashx?id=1" onclick="this.src=this.src+1" />
+
+            </div>
+
+            <div class="rem-for-agile">
+                <input type="checkbox" name="remember" class="remember">记得我
+
+                <br>
+                <a href="#">忘记了密码</a><br>
+            </div>
+            <div style="color:red;">@ViewBag.Yzm </div>
+            <div class="login-w3">
+                <input type="submit" class="login" value="登录">
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+    <div class="footer-w3l">
+        <p> 青葱私人诊所登录系统</p>
+    </div>
+
+   
+
+    <script type="text/javascript">
+
+        $("#LoginForm").validate({
+
+            rules: {
+                UserLogin: { required: true, maxlength: 30 },
+                UserPwd: { required: true, checkPwd: true },
+                Yzm: { required: true }
+            },
+            messages: {
+                UserLogin: { required: "账号必填!", maxlength: "账号输入内容不能超过30字!" },
+                UserPwd: { required: "密码必填!", checkPwd: "密码组成：6-12位的字母数字组成!" },
+                  Yzm: { required: "验证码必填!" }
+            }
+        });
+        $.validator.addMethod("checkPwd", function (value, e) {
+            var reg = /^[A-Za-z0-9]{6,12}$/;
+            return reg.test(value);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5a5f356384b4c7c968db4caec69c336" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="PrivateClinicModel.Appointment" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Conclusion" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.ReturnVisit" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrivateClinicModel.KnowledgeBase" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Family" Width="1.5" PointX="8" PointY="16.75" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Marriage" Width="1.5" PointX="8" PointY="22.875" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Menstrual" Width="1.5" PointX="8" PointY="13.75" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Present" Width="1.5" PointX="8" PointY="19.875" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Customer" Width="1.5" PointX="4.75" PointY="12.375" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Family_Customer" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Marriage_Customer" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Menstrual_Customer" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Present_Customer" />
+        <EntityTypeShape EntityType="PrivateClinicModel.MedicalHistory" Width="1.5" PointX="7" PointY="2.25" />
+        <AssociationConnector Association="PrivateClinicModel.FK_MedicalHistory_Customer" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Inspect" Width="1.5" PointX="0.75" PointY="5" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Conclusion_Inspect" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Internal" Width="1.5" PointX="3" PointY="17.875" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Internal_Inspect" />
+        <EntityTypeShape EntityType="PrivateClinicModel.Surgery" Width="1.5" PointX="3" PointY="4.75" />
+        <AssociationConnector Association="PrivateClinicModel.FK_Surgery_Inspect" />
+        <EntityTypeShape EntityType="PrivateClinicModel.UserInfo" Width="1.5" PointX="0.75" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

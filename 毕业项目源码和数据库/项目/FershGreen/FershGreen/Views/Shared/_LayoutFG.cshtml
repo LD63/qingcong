@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<style>
+    #aaa {
+        text-decoration: none;
+    }
+
+    ul li {
+       
+    }
+    dl{
+
+    }
+    dl dd:hover {
+        background: rgba(247, 240, 240, 0.20);
+        transition-property: all;
+        transition-duration: 0.5s;
+    }
+</style>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>青葱私人诊所</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">青葱私人诊所</div>
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item" id="time" style="margin-right: 50px;font-size: 20px;color: #2fb9d4;font-family: 'yjsz'"></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item"><a href="javascript:;" id="aaa">职位：@Session["Role"]</a></li>
+                <li class="layui-nav-item item1">
+                    <a href="javascript:;" id="aaa">
+                        <img src="~/images/@Session["Pic"]" class="layui-nav-img">
+                        @Session["Name"]
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/User/Index/@Session["ID"]" id="aaa"><i class="layui-icon">&#xe66f;</i>  个人信息</a></dd>
+                        <dd><a href="/User/Edit/@Session["ID"]" id="aaa"><i class="layui-icon">&#xe770;</i>  修改密码</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item item1">  <a href="/Login/logout" onclick="return confirm('是否退出系统？')" id="aaa"> <i class="layui-icon">&#xe682;</i> 退出</a> </li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item"><a href="" id="aaa"><i class="layui-icon" style="font-size: 17px; color:#2ea7dc">&#xe68e; </i> 首页</a></li>
+                    <li class="layui-nav-item item1 ">
+                        <a class="" href="javascript:;" id="aaa"><i class="layui-icon" style="font-size: 15px;">&#xe653; </i>客户信息管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/Customer/Index" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>客户档案</a></dd>
+                            <dd><a href="/Appoint/Index" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>客户预约</a></dd>
+                            <dd><a href="/Inspect/Index/@Session["ID"]" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>体检信息</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item item1">
+                        <a href="javascript:;" id="aaa"><i class="layui-icon" style="font-size: 15px;">&#xe656; </i>客户服务管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>咨询管理</a></dd>
+                            <dd><a href="" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>回访管理</a></dd>
+                            <dd><a href="" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>客户关怀</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item item1">
+                        <a href="javascript:;" id="aaa"><i class="layui-icon" style="font-size:15px;">&#xe705; </i>知识库管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/Knowle/Index" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>知识库内容</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item item1">
+                        <a href="javascript:;" id="aaa"> <i class="layui-icon" style="font-size:15px;">&#xe620; </i> 系统管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/User/Index/@Session["ID"]" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>个人信息</a></dd>
+                            @if (Session["Role"].ToString() == "主任医生")
+                            {
+                                <dd><a href="/User/List/@Session["ID"]" style="margin-left:5px;" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>用户信息</a></dd>
+                            }
+                            <dd><a href="/Login/logout" style="margin-left:5px;" onclick="return confirm('是否退出系统？')" id="aaa"><i class="layui-icon" style="font-size: 10px;">&#xe602; </i>退出系统</a></dd>
+                        </dl>
+                    </li>
+                </ul> 
+            </div>
+        </div>
+
+        <div class="layui-body" style="background:#F6F8F9;">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">@RenderBody()</div>
+        </div>
+
+        <div class="layui-footer" style="text-align:center;">
+            <!-- 底部固定区域 -->
+            © 青葱私人诊所 
+        </div>
+    </div>
+    <script src="~/layui/layui.js"></script>
+    <script>
+        //JavaScript代码区域
+        layui.use('element', function () {
+            var element = layui.element;
+
+        });
+    </script>
+    <script>
+        //顶部时间
+        function getTime() {
+            var myDate = new Date();
+            var myYear = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+            var myMonth = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+            var myToday = myDate.getDate(); //获取当前日(1-31)
+            var myDay = myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
+            var myHour = myDate.getHours(); //获取当前小时数(0-23)
+            var myMinute = myDate.getMinutes(); //获取当前分钟数(0-59)
+            var mySecond = myDate.getSeconds(); //获取当前秒数(0-59)
+            var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            var nowTime;
+
+            nowTime = myYear + '-' + fillZero(myMonth) + '-' + fillZero(myToday) + '&nbsp;&nbsp;' + fillZero(myHour) + ':' + fillZero(myMinute) + ':' + fillZero(mySecond) + '&nbsp;&nbsp;' + week[myDay] + '&nbsp;&nbsp;';
+            //console.log(nowTime);
+            $('#time').html(nowTime);
+        };
+        function fillZero(str) {
+            var realNum;
+            if (str < 10) {
+                realNum = '0' + str;
+            } else {
+                realNum = str;
+            }
+            return realNum;
+        }
+        setInterval(getTime, 1000);
+    </script>
+
+</body>
+</html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

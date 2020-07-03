@@ -1,0 +1,270 @@
+﻿@model FershGreen.Models.Customer
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutFG.cshtml";
+}
+<style>
+    #item{
+        width:150px;
+        height:30px;
+        line-height:15px;
+    }
+    #yy{
+        position:relative;
+        left:15px;
+    }
+    .itm{
+        width:130px;  height:30px;line-height:15px;
+    }
+</style>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">信息管理</a>
+            <a><cite>添加信息</cite></a>
+        </span>
+        <a href="/Customer/Index" style="margin-left:800px; text-decoration:none"><i class="layui-icon " style="font-size:30px; margin:20px; padding-top:20px;">&#xe609; </i></a>
+    </ol>
+    
+</nav>
+<hr />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<form class="layui-form layui-form-pane" action="/Customer/Create" method="post">
+    <div class="" style="background: #aeb3b5; height: 25px; line-height: 25px;">
+        &nbsp;
+        <svg class="bi bi-bookmarks-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top:-5px">
+            <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z" />
+            <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z" />
+        </svg>
+        <span>基本信息</span>
+    </div><br />
+    <div class="layui-form-item" style="margin-left:0px" id="yy">
+
+        <label class="layui-form-label" style="width:73px;height:30px;line-height:15px">姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusName" lay-verify="required" lay-reqtext="姓名必须填" placeholder="" autocomplete="off" class="layui-input " id="item">
+        </div>
+        <label class="layui-form-label" style="width:88px;height:30px;line-height:15px">出生年月</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusBirth" lay-verify="date" placeholder="" autocomplete="off" class="layui-input " id="item">
+        </div>
+        <label class="layui-form-label" style="width:75px;height:30px;line-height:15px">身份证</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusCard" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input" id="item">
+        </div>
+        <label class="layui-form-label" style="width:83px;height:30px;line-height:15px">性别</label>
+        <div class="layui-input-inline">
+            <input type="radio" name="CusSex" value="男" title="男" checked="" >
+            <input type="radio" name="CusSex" value="女" title="女">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-left:0px" id="yy">
+        <label class="layui-form-label" style="width:73px;height:30px;line-height:15px">民族</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusNation" lay-verify="required" placeholder="" autocomplete="off" class="layui-input " id="item" style="">
+        </div>
+        <label class="layui-form-label" style="width:88px;height:30px;line-height:15px">婚姻状况</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusMarriage" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="item">
+        </div>
+        <label class="layui-form-label" style="width:73px;height:30px;line-height:15px">血型</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusBloodType" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="item">
+        </div>
+        <label class="layui-form-label" style="width:88px;height:30px;line-height:15px">联系电话</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusTelephone" lay-verify="phone" placeholder="" autocomplete="off" class="layui-input" id="item">
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-left:0px" id="yy">
+        <label class="layui-form-label" style="width:73px;height:30px;line-height:15px">职业</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusOccupation" lay-verify="required" placeholder="" autocomplete="off" class="layui-input " id="item" style="">
+        </div>
+        <label class="layui-form-label" style="width:88px;height:30px;line-height:15px">住址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="CusAddress" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="item">
+        </div>
+        <label class="layui-form-label" style="width:88px;height:30px;line-height:15px">主治医生</label>
+        <div class="l">
+            <input type="text" name="CusDoctor" readonly value="@Session["Name"]" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="item">
+        </div>
+    </div>
+    <div class="" style="background: #aeb3b5; height: 25px; line-height: 25px;">
+        &nbsp;
+        <svg class="bi bi-bookmarks-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top:-5px">
+            <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z" />
+            <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z" />
+        </svg>
+        <span>现病史</span>
+    </div><br />
+    <div class="layui-form-item" style="padding-left:18px">
+        <label class="layui-form-label">现病史</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PreCategory" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ">
+        </div>
+        <label class="layui-form-label">发生时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PreTime" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">就诊地点</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PrePlace" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div style="padding-left:18px">
+        <label class="layui-form-label" style="height:50px; line-height:30px">病史情况</label>
+        <div class="" style="margin-top:-10px">
+            <textarea placeholder="请输入内容" name="PreSurvey" rows="3" cols="110"></textarea>
+        </div>
+        <input type="hidden" name="PCusID" />
+    </div><br /><div class="" style="background: #aeb3b5; height: 25px; line-height: 25px;">
+    &nbsp;
+    <svg class="bi bi-bookmarks-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top:-5px">
+        <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z" />
+        <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z" />
+    </svg>
+    <span>既往史</span>
+</div><br />
+    <div class="layui-form-item" style="padding-left:18px">
+        <label class="layui-form-label">既往史</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MedCategory" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ">
+        </div>
+        <label class="layui-form-label">发生时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MedTime" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">就诊地点</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MedPlace" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div style="padding-left:18px">
+        <label class="layui-form-label" style="height:50px; line-height:30px">病史情况</label>
+        <div class="" style="margin-top:-10px">
+            <textarea placeholder="请输入内容" name="MedSurvey" rows="3" cols="110"></textarea>
+        </div>
+        <input type="hidden" name="MCusID" />
+    </div><br />
+          <div class="" style="background: #aeb3b5; height: 25px; line-height: 25px;">
+              &nbsp;
+              <svg class="bi bi-bookmarks-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top:-5px">
+                  <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z" />
+                  <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z" />
+              </svg>
+              <span>家族史</span>
+          </div>
+    <br />
+    <div class="layui-form-item" style="padding-left:18px">
+        <label class="layui-form-label">家族史</label>
+        <div class="layui-input-inline">
+            <input type="text" name="FamCategory" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ">
+        </div>
+        <label class="layui-form-label">发生时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="FamTime" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">就诊地点</label>
+        <div class="layui-input-inline">
+            <input type="text" name="FamPlace" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div style="padding-left:18px">
+        <label class="layui-form-label" style="height:50px; line-height:30px">病史情况</label>
+        <div class="" style="margin-top:-10px">
+            <textarea placeholder="请输入内容" name="FamSurvey" rows="3" cols="110"></textarea>
+        </div>
+        <input type="hidden" name="FCusID" />
+    </div><br /><div class="" style="background: #aeb3b5; height: 25px; line-height: 25px;">
+    &nbsp;
+    <svg class="bi bi-bookmarks-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top:-5px">
+        <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z" />
+        <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z" />
+    </svg>
+    <span>月经史</span>
+</div><br />
+    <div class="layui-form-item" style="padding-left:18px">
+        <label class="layui-form-label">月经史</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MenCategory" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ">
+        </div>
+        <label class="layui-form-label">发生时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MenTime" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">就诊地点</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MenPlace" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div style="padding-left:18px">
+        <label class="layui-form-label" style="height:50px; line-height:30px">病史情况</label>
+        <div class="" style="margin-top:-10px">
+            <textarea placeholder="请输入内容" name="MenSurvey" rows="3" cols="110"></textarea>
+        </div>
+        <input type="hidden" name="SCusID" />
+    </div><br /><div class="" style="background: #aeb3b5; height: 25px; line-height: 25px;">
+    &nbsp;
+    <svg class="bi bi-bookmarks-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top:-5px">
+        <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z" />
+        <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z" />
+    </svg>
+    <span>婚孕史</span>
+</div><br />
+    <div class="layui-form-item" style="padding-left:18px">
+        <label class="layui-form-label">婚孕史</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MarCategory" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ">
+        </div>
+        <label class="layui-form-label">发生时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MarTime" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">就诊地点</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MarPlace" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div style="padding-left:18px">
+        <label class="layui-form-label" style="height:50px; line-height:30px">病史情况</label>
+        <div class="" style="margin-top:-10px">
+            <textarea placeholder="请输入内容" name="MarSurvey" rows="3" cols="110"></textarea>
+        </div>
+        <input type="hidden" name="RCusID" />
+    </div>
+
+    <div class="layui-form-item" style="margin-left:20px;margin-top:10px;">
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">添加</button>
+    </div>
+</form>
+<script src="~/layui/layui.js"></script>
+
+<script>
+   layui.use('form', function(){
+  var form = layui.form;
+  form.render();
+});  
+    layui.use('laydate', function () {
+        
+            form.render('radio');
+        
+  var laydate = layui.laydate;
+  
+      //执行一个laydate实例
+      laydate.render({
+          elem:'#test1'
+      })
+});
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

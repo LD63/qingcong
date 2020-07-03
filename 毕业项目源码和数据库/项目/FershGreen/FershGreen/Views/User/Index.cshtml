@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFG.cshtml";
+}
+@using FershGreen.Models
+@model UserInfo
+<style>
+    img {
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px #44576b;
+        border-radius: 100%
+    }
+
+    .top {
+        text-align: center;
+        padding-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .out {
+        padding-right: 20px;
+        padding-bottom: 30px;
+    }
+</style>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<div style=" margin-left: 10%;">
+    <h1>个人资料</h1><br />
+    <div style="width:90%;background:#fff;" class="out">
+        <form class="layui-form" action="/User/Index" method="post" enctype="multipart/form-data">
+            <div title="我要换一个头像" class="top">
+                <img id="img" src="~/images/@Model.UserPicture" />
+                <div style="margin-left:45px; margin-top:10px;">
+                    <input type="hidden" name="UserPicture" value="@Model.UserPicture"/>
+                    <input type="file" name="file" class="" style="width:110px;" onchange="fileReader(this)" />
+                </div>
+            </div>
+            <input type="hidden" name="UserID" value="@Model.UserID"/>
+            <div class="layui-form-item cent">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="UserLogin" lay-verify="required" lay-reqtext="用户名必须填" value="@Model.UserLogin" placeholder="请输入标题" autocomplete="off" class="layui-input" ">
+                </div>
+            </div>
+            <input type="hidden" name="UserPwd" value="@Model.UserPwd" />
+            <div class="layui-form-item cent">
+                <label class="layui-form-label">职位</label>
+                <div class="layui-input-block">
+                    <input type="text" name="UserRole" value="@Model.UserRole" readonly lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input layui-disabled">
+                </div>
+            </div>
+            <div class="layui-form-item cent">
+                <label class="layui-form-label">真实姓名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="UserName" value="@Model.UserName" lay-verify="required" lay-reqtext="请填写真实姓名" placeholder="请输入标题" autocomplete="off" class="layui-input" ">
+                </div>
+            </div>
+            <input type="hidden" name="UserPwd" value="@Model.UserPwd" />
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    @if (Model.UserSex == "男")
+                    {
+                        <input type="radio" name="UserSex" value="男" title="男" checked>
+                        <input type="radio" name="UserSex" value="女" title="女">
+                    }
+                    else
+                    {
+                        <input type="radio" name="UserSex" value="男" title="男">
+                        <input type="radio" name="UserSex" value="女" title="女" checked>
+                    }
+
+                </div>
+            </div>
+            <div class="layui-form-item cent">
+                <label class="layui-form-label">出生年月</label>
+                <div class="layui-input-block">
+                    <input type="text" name="UserBirth" value="@string.Format("{0:yyyy-MM-dd}",Model.UserBirth)" lay-verify="required" lay-reqtext="请填写出生年月" placeholder="请输入标题" autocomplete="off" class="layui-input" ">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">自我评价</label>
+                <div class="layui-input-block">
+                    <textarea name="UserQua" placeholder="请输入内容" lay-verify="required" lay-reqtext="请填写自我评价" class="layui-textarea">@Model.UserQua</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即修改</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+<script type="text/javascript">
+    function fileReader(obj) {
+        var file = obj.files;
+        var img = document.getElementById("img");
+        var reader = new FileReader();// 操作图片
+        if (/image/.test(file[0].type)) {
+            reader.readAsDataURL(file[0]);
+
+        } else {
+            alert('请选择图片!');
+            obj.value = "";
+            return;
+
+        }
+        // 图片加载错误
+        reader.onerror = function () {
+            document.write("图片加载错误");
+
+        }
+        // 图片加载完成
+        reader.onload = function () {
+            img.src = reader.result;
+
+        }
+
+    }
+</script>
