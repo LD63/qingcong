@@ -45,12 +45,21 @@ namespace FershGreen.Controllers
         }
 
         //添加
-        [HttpPost]
+        [HttpPost]    
         public ActionResult Create(KnowledgeBase Kno)
         {
             db.KnowledgeBase.Add(Kno);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult Edit(KnowledgeBase Kno)
+        {
+            db.Entry(Kno).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }

@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Bithday";
+    Layout = "~/Views/Shared/_LayoutFG.cshtml";
+    var cus = ViewBag.cus as List<FershGreen.Models.Customer>;
+    int a = 1;
+}
+@using FershGreen.Models
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.5.1.slim.min.js"></script>
+<script src="~/Scripts/popper.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">客户关怀</a>
+            <a><cite>信息管理</cite></a>
+        </span>
+    </ol>
+</nav>
+<br />
+<div class="" style="background: #aeb3b5; height: 25px; line-height: 25px;">
+    &nbsp;
+    <svg class="bi bi-bookmarks-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top:-5px">
+        <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V4z" />
+        <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z" />
+    </svg>
+    <span>近十天过生日的客户</span>
+</div>
+
+<table class="table table-striped table-hover" style="text-align:center;">
+
+    <tr>
+        <th>
+            编号
+        </th>
+        <th>
+            姓名
+        </th>
+        <th>
+            性别
+        </th>
+        <th>
+            民族
+        </th>
+        <th>
+            出生年月
+        </th>
+        <th>
+            家庭住址
+        </th>
+        <th>
+            联系电话
+        </th>
+        <th>
+            主治医生
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+
+    @foreach (var item in cus)
+    {
+        <tr>
+            <td>
+                @a
+            </td>
+            <td>
+                @item.CusName
+            </td>
+            <td>
+                @item.CusSex
+            </td>
+            <td>
+                @item.CusNation
+            </td>
+            <td>
+                @string.Format("{0:yyyy/MM/dd}", item.CusBirth) 
+            </td>
+            <td>
+                @item.CusAddress
+            </td>
+            <td>
+                @item.CusTelephone
+            </td>
+            <td>
+                @item.CusDoctor
+            </td>
+            <td>
+                <a href="/Customer/Details/@item.CusID">详情</a>
+            </td>
+        </tr>
+        a++;
+    }
+</table>
+@*分页*@
+<div style="position:absolute;top:500px;height:auto;width:1100px;">
+    <div classs="row">
+        <div class="col-lg-10">
+            <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+            <select onchange="window.location = this.value;">
+                @{
+                    int[] count = new[] { 2, 4, 5 };
+                }
+                @foreach (var item in count)
+                {
+                    if (item.Equals(ViewBag.pageCount))
+                    {
+                        <option value="/Consulta/Bithday?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                    }
+                    else
+                    {
+                        <option value="/Consulta/Bithday?pageCount=@item">@item</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <div class="col-lg-4" style="position:absolute;top:-12px;left:700px;height:auto;width:1100px;">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="/Consulta/Bithday?pageCount=@ViewBag.pageCount">首页</a>
+                    </li>
+
+                    @if (@ViewBag.pageIndex > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/Consulta/Bithday?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">上一页</a>
+                        </li>
+                    }
+
+                    <li class="page-item">
+                        <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                    </li>
+
+                    @if (@ViewBag.pageIndex < @ViewBag.totalPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/Consulta/Bithday?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">下一页</a>
+                        </li>
+                    }
+
+                    <li class="page-item"><a class="page-link" href="/Consulta/Bithday?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>@*分页尾*@

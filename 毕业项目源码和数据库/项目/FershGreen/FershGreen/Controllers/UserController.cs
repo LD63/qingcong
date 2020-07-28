@@ -42,7 +42,30 @@ namespace FershGreen.Controllers
             db.SaveChanges();
             return RedirectToAction("Index","Customer");
         }
-
+        [HttpPost]
+        //添加用户
+        public ActionResult Create(UserInfo user, HttpPostedFileBase file)
+        {
+            //先处理图片
+            //1、获取上传的文件名
+            if (file != null)
+            {
+                string fileName = Path.GetFileName(file.FileName);
+                string e = Path.GetExtension(fileName);//截取出来的会带点
+                if (e == ".jpg" || e == ".png" || e == ".gif" || e == ".bmp")
+                {
+                    file.SaveAs(Server.MapPath("~/images/" + fileName));
+                    user.UserPicture = fileName;
+                }
+                else
+                {
+                    ViewBag.Message = "图片格式上传不正确!!";
+                }
+            }
+            db.UserInfo.Add(user);
+            db.SaveChanges();
+            return RedirectToAction("List");
+        }
         //修改密码
         public ActionResult Edit(int? id)
         {
@@ -77,18 +100,24 @@ namespace FershGreen.Controllers
         public ActionResult List(int pageIndex = 1, int pageCount = 4, string Name = "")
         {
             //return View(db.UserInfo.ToList());
-            int totalCount = db.UserInfo.OrderBy(p => p.UserID).Count();
-            //总页数
-            double totalPage = Math.Ceiling((double)totalCount / pageCount);
-            //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<UserInfo> use = db.UserInfo.OrderBy(p => p.UserID).Where(p => Name == "" || p.UserName.Contains(Name))
-                 .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
-            ViewBag.pageIndex = pageIndex;
-            ViewBag.pageCount = pageCount;
-            ViewBag.totalCount = totalCount;
-            ViewBag.totalPage = totalPage;
-            ViewBag.Name = Name;
-            return View(use);
+            
+            string a = Session["Name"].ToString();
+            if (Session["Role"].ToString() == "主任医生")
+            {
+                int totalCount = db.UserInfo.OrderBy(p => p.UserID).Where(p=>p.UserName!=a).Count();
+                //总页数
+                double totalPage = Math.Ceiling((double)totalCount / pageCount);
+                //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
+                List<UserInfo> use = db.UserInfo.OrderBy(p => p.UserID).Where(p => (p.UserName != a && Name == "") || (p.UserName != a && p.UserName.Contains(Name)))
+                     .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+                ViewBag.pageIndex = pageIndex;
+                ViewBag.pageCount = pageCount;
+                ViewBag.totalCount = totalCount;
+                ViewBag.totalPage = totalPage;
+                ViewBag.Name = Name;
+                return View(use);
+            }
+            return View();
         }
 
         //详情
@@ -102,7 +131,7 @@ namespace FershGreen.Controllers
             var dele = db.UserInfo.Find(id);
             db.UserInfo.Remove(dele);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("List","User");
         }
     }
 }

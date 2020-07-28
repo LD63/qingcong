@@ -38,7 +38,7 @@ namespace FershGreen.Controllers
                     Session["Role"] = login.UserRole;
                     Session["Pic"] = login.UserPicture;
                     Session["ID"] = login.UserID;
-                    return RedirectToAction("Index", "Customer");
+                    return RedirectToAction("Contact2", "Home");
                 }
                 else
                 {

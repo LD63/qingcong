@@ -19,16 +19,16 @@ namespace FershGreen.Models
         {
             this.Family = new HashSet<Family>();
             this.Marriage = new HashSet<Marriage>();
+            this.MedicalHistory = new HashSet<MedicalHistory>();
             this.Menstrual = new HashSet<Menstrual>();
             this.Present = new HashSet<Present>();
-            this.MedicalHistory = new HashSet<MedicalHistory>();
         }
     
         public int CusID { get; set; }
         public string CusName { get; set; }
         public string CusCard { get; set; }
         public string CusSex { get; set; }
-        public string CusBirth { get; set; }
+        public Nullable<System.DateTime> CusBirth { get; set; }
         public string CusMarriage { get; set; }
         public string CusNation { get; set; }
         public string CusAddress { get; set; }
@@ -42,10 +42,10 @@ namespace FershGreen.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Marriage> Marriage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MedicalHistory> MedicalHistory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Menstrual> Menstrual { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Present> Present { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedicalHistory> MedicalHistory { get; set; }
     }
 }

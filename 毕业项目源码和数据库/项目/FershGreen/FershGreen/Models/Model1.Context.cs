@@ -16,7 +16,7 @@ namespace FershGreen.Models
     public partial class PrivateClinicEntities : DbContext
     {
         public PrivateClinicEntities()
-            : base("name=PrivateClinicEntities")
+            : base("name=PrivateClinicEntities1")
         {
         }
     
@@ -27,18 +27,19 @@ namespace FershGreen.Models
     
         public virtual DbSet<Appointment> Appointment { get; set; }
         public virtual DbSet<Conclusion> Conclusion { get; set; }
-        public virtual DbSet<ReturnVisit> ReturnVisit { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<KnowledgeBase> KnowledgeBase { get; set; }
-        public virtual DbSet<Family> Family { get; set; }
-        public virtual DbSet<Marriage> Marriage { get; set; }
-        public virtual DbSet<Menstrual> Menstrual { get; set; }
-        public virtual DbSet<Present> Present { get; set; }
+        public virtual DbSet<Consultation> Consultation { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<MedicalHistory> MedicalHistory { get; set; }
+        public virtual DbSet<Family> Family { get; set; }
         public virtual DbSet<Inspect> Inspect { get; set; }
         public virtual DbSet<Internal> Internal { get; set; }
+        public virtual DbSet<KnowledgeBase> KnowledgeBase { get; set; }
+        public virtual DbSet<Marriage> Marriage { get; set; }
+        public virtual DbSet<MedicalHistory> MedicalHistory { get; set; }
+        public virtual DbSet<Menstrual> Menstrual { get; set; }
+        public virtual DbSet<Present> Present { get; set; }
+        public virtual DbSet<ReturnVisit> ReturnVisit { get; set; }
         public virtual DbSet<Surgery> Surgery { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
     }
 }

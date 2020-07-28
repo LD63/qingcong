@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PrivateClinicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PrivateClinicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="AppID" />
@@ -26,6 +26,17 @@
           <Property Name="ConDescribe" Type="nvarchar" MaxLength="100" />
           <Property Name="InID" Type="int" />
         </EntityType>
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="ConsuID" />
+          </Key>
+          <Property Name="ConsuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConsuName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConsuContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="ConsuProposal" Type="nvarchar" MaxLength="100" />
+          <Property Name="ConsuTime" Type="date" />
+          <Property Name="ConsuFill" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CusID" />
@@ -34,7 +45,7 @@
           <Property Name="CusName" Type="nvarchar" MaxLength="50" />
           <Property Name="CusCard" Type="nvarchar" MaxLength="50" />
           <Property Name="CusSex" Type="nvarchar" MaxLength="10" />
-          <Property Name="CusBirth" Type="nvarchar" MaxLength="50" />
+          <Property Name="CusBirth" Type="date" />
           <Property Name="CusMarriage" Type="nvarchar" MaxLength="50" />
           <Property Name="CusNation" Type="nvarchar" MaxLength="50" />
           <Property Name="CusAddress" Type="nvarchar" MaxLength="50" />
@@ -287,6 +298,7 @@
         <EntityContainer Name="PrivateClinicModelStoreContainer">
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Conclusion" EntityType="Self.Conclusion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Family" EntityType="Self.Family" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspect" EntityType="Self.Inspect" Schema="dbo" store:Type="Tables" />
@@ -333,7 +345,8 @@
             <End Role="Surgery" EntitySet="Surgery" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PrivateClinicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -357,89 +370,40 @@
           <Property Name="ConConclu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ConDescribe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="InID" Type="Int32" />
-          <NavigationProperty Name="Inspect" Relationship="PrivateClinicModel.FK_Conclusion_Inspect" FromRole="Conclusion" ToRole="Inspect" />
+          <NavigationProperty Name="Inspect" Relationship="Self.FK_Conclusion_Inspect" FromRole="Conclusion" ToRole="Inspect" />
         </EntityType>
-        <EntityType Name="ReturnVisit">
+        <EntityType Name="Consultation">
           <Key>
-            <PropertyRef Name="RetID" />
+            <PropertyRef Name="ConsuID" />
           </Key>
-          <Property Name="RetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RetIsomorphism" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Resul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RetTime" Type="DateTime" Precision="0" />
-          <Property Name="RetPeople" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConsuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConsuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConsuContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ConsuProposal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ConsuTime" Type="DateTime" Precision="0" />
+          <Property Name="ConsuFill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="CusID" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityContainer Name="PrivateClinicEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Appointment" EntityType="Self.Appointment" />
-          <EntitySet Name="Conclusion" EntityType="Self.Conclusion" />
-          <EntitySet Name="ReturnVisit" EntityType="Self.ReturnVisit" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="KnowledgeBase" EntityType="PrivateClinicModel.KnowledgeBase" />
-          <EntitySet Name="Family" EntityType="PrivateClinicModel.Family" />
-          <EntitySet Name="Marriage" EntityType="PrivateClinicModel.Marriage" />
-          <EntitySet Name="Menstrual" EntityType="PrivateClinicModel.Menstrual" />
-          <EntitySet Name="Present" EntityType="PrivateClinicModel.Present" />
-          <EntitySet Name="Customer" EntityType="PrivateClinicModel.Customer" />
-          <AssociationSet Name="FK_Family_Customer" Association="PrivateClinicModel.FK_Family_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Family" EntitySet="Family" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Marriage_Customer" Association="PrivateClinicModel.FK_Marriage_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Marriage" EntitySet="Marriage" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Menstrual_Customer" Association="PrivateClinicModel.FK_Menstrual_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Menstrual" EntitySet="Menstrual" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Present_Customer" Association="PrivateClinicModel.FK_Present_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Present" EntitySet="Present" />
-          </AssociationSet>
-          <EntitySet Name="MedicalHistory" EntityType="PrivateClinicModel.MedicalHistory" />
-          <AssociationSet Name="FK_MedicalHistory_Customer" Association="PrivateClinicModel.FK_MedicalHistory_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="MedicalHistory" EntitySet="MedicalHistory" />
-          </AssociationSet>
-          <EntitySet Name="Inspect" EntityType="PrivateClinicModel.Inspect" />
-          <AssociationSet Name="FK_Conclusion_Inspect" Association="PrivateClinicModel.FK_Conclusion_Inspect">
-            <End Role="Inspect" EntitySet="Inspect" />
-            <End Role="Conclusion" EntitySet="Conclusion" />
-          </AssociationSet>
-          <EntitySet Name="Internal" EntityType="PrivateClinicModel.Internal" />
-          <AssociationSet Name="FK_Internal_Inspect" Association="PrivateClinicModel.FK_Internal_Inspect">
-            <End Role="Inspect" EntitySet="Inspect" />
-            <End Role="Internal" EntitySet="Internal" />
-          </AssociationSet>
-          <EntitySet Name="Surgery" EntityType="PrivateClinicModel.Surgery" />
-          <AssociationSet Name="FK_Surgery_Inspect" Association="PrivateClinicModel.FK_Surgery_Inspect">
-            <End Role="Inspect" EntitySet="Inspect" />
-            <End Role="Surgery" EntitySet="Surgery" />
-          </AssociationSet>
-          <EntitySet Name="UserInfo" EntityType="PrivateClinicModel.UserInfo" />
-          </EntityContainer>
-        <EntityType Name="KnowledgeBase">
-          <Key>
-            <PropertyRef Name="KnowID" />
-          </Key>
-          <Property Name="KnowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KnowCommon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="KnowType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="KnowAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="KnowAdd" Type="DateTime" Precision="0" />
-          <Property Name="KnowPeople" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CusBirth" Type="DateTime" Precision="0" />
+          <Property Name="CusMarriage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusNation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusTelephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="CusOccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusBloodType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CusDoctor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Family" Relationship="Self.FK_Family_Customer" FromRole="Customer" ToRole="Family" />
+          <NavigationProperty Name="Marriage" Relationship="Self.FK_Marriage_Customer" FromRole="Customer" ToRole="Marriage" />
+          <NavigationProperty Name="MedicalHistory" Relationship="Self.FK_MedicalHistory_Customer" FromRole="Customer" ToRole="MedicalHistory" />
+          <NavigationProperty Name="Menstrual" Relationship="Self.FK_Menstrual_Customer" FromRole="Customer" ToRole="Menstrual" />
+          <NavigationProperty Name="Present" Relationship="Self.FK_Present_Customer" FromRole="Customer" ToRole="Present" />
         </EntityType>
         <EntityType Name="Family">
           <Key>
@@ -451,138 +415,8 @@
           <Property Name="FamPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FamSurvey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="FCusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PrivateClinicModel.FK_Family_Customer" FromRole="Family" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Family_Customer" FromRole="Family" ToRole="Customer" />
         </EntityType>
-        <EntityType Name="Marriage">
-          <Key>
-            <PropertyRef Name="MarID" />
-          </Key>
-          <Property Name="MarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MarCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MarTime" Type="DateTime" Precision="0" />
-          <Property Name="MarPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MarSurvey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="RCusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PrivateClinicModel.FK_Marriage_Customer" FromRole="Marriage" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="Menstrual">
-          <Key>
-            <PropertyRef Name="MenID" />
-          </Key>
-          <Property Name="MenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MenCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MenTime" Type="DateTime" Precision="0" />
-          <Property Name="MenPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MenSurvey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SCusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PrivateClinicModel.FK_Menstrual_Customer" FromRole="Menstrual" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="Present">
-          <Key>
-            <PropertyRef Name="PreID" />
-          </Key>
-          <Property Name="PreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PreCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PreTime" Type="DateTime" Precision="0" />
-          <Property Name="PrePlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PreSurvey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PCusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PrivateClinicModel.FK_Present_Customer" FromRole="Present" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="CusID" />
-          </Key>
-          <Property Name="CusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CusCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CusSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CusBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CusMarriage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CusNation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CusAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CusTelephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="CusOccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CusBloodType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CusDoctor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Family" Relationship="PrivateClinicModel.FK_Family_Customer" FromRole="Customer" ToRole="Family" />
-          <NavigationProperty Name="Marriage" Relationship="PrivateClinicModel.FK_Marriage_Customer" FromRole="Customer" ToRole="Marriage" />
-          <NavigationProperty Name="Menstrual" Relationship="PrivateClinicModel.FK_Menstrual_Customer" FromRole="Customer" ToRole="Menstrual" />
-          <NavigationProperty Name="Present" Relationship="PrivateClinicModel.FK_Present_Customer" FromRole="Customer" ToRole="Present" />
-          <NavigationProperty Name="MedicalHistory" Relationship="PrivateClinicModel.FK_MedicalHistory_Customer" FromRole="Customer" ToRole="MedicalHistory" />
-        </EntityType>
-        <Association Name="FK_Family_Customer">
-          <End Type="PrivateClinicModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PrivateClinicModel.Family" Role="Family" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CusID" />
-            </Principal>
-            <Dependent Role="Family">
-              <PropertyRef Name="FCusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Marriage_Customer">
-          <End Type="PrivateClinicModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PrivateClinicModel.Marriage" Role="Marriage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CusID" />
-            </Principal>
-            <Dependent Role="Marriage">
-              <PropertyRef Name="RCusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Menstrual_Customer">
-          <End Type="PrivateClinicModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PrivateClinicModel.Menstrual" Role="Menstrual" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CusID" />
-            </Principal>
-            <Dependent Role="Menstrual">
-              <PropertyRef Name="SCusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Present_Customer">
-          <End Type="PrivateClinicModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PrivateClinicModel.Present" Role="Present" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CusID" />
-            </Principal>
-            <Dependent Role="Present">
-              <PropertyRef Name="PCusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="MedicalHistory">
-          <Key>
-            <PropertyRef Name="MedID" />
-          </Key>
-          <Property Name="MedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MedCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MedTime" Type="DateTime" Precision="0" />
-          <Property Name="MedPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MedSurvey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MCusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PrivateClinicModel.FK_MedicalHistory_Customer" FromRole="MedicalHistory" ToRole="Customer" />
-        </EntityType>
-        <Association Name="FK_MedicalHistory_Customer">
-          <End Type="PrivateClinicModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PrivateClinicModel.MedicalHistory" Role="MedicalHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CusID" />
-            </Principal>
-            <Dependent Role="MedicalHistory">
-              <PropertyRef Name="MCusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Inspect">
           <Key>
             <PropertyRef Name="InID" />
@@ -593,22 +427,10 @@
           <Property Name="InTime" Type="DateTime" Precision="0" />
           <Property Name="ConConclu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ConDescribe" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Conclusion" Relationship="PrivateClinicModel.FK_Conclusion_Inspect" FromRole="Inspect" ToRole="Conclusion" />
-          <NavigationProperty Name="Internal" Relationship="PrivateClinicModel.FK_Internal_Inspect" FromRole="Inspect" ToRole="Internal" />
-          <NavigationProperty Name="Surgery" Relationship="PrivateClinicModel.FK_Surgery_Inspect" FromRole="Inspect" ToRole="Surgery" />
+          <NavigationProperty Name="Conclusion" Relationship="Self.FK_Conclusion_Inspect" FromRole="Inspect" ToRole="Conclusion" />
+          <NavigationProperty Name="Internal" Relationship="Self.FK_Internal_Inspect" FromRole="Inspect" ToRole="Internal" />
+          <NavigationProperty Name="Surgery" Relationship="Self.FK_Surgery_Inspect" FromRole="Inspect" ToRole="Surgery" />
         </EntityType>
-        <Association Name="FK_Conclusion_Inspect">
-          <End Type="PrivateClinicModel.Inspect" Role="Inspect" Multiplicity="0..1" />
-          <End Type="PrivateClinicModel.Conclusion" Role="Conclusion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspect">
-              <PropertyRef Name="InID" />
-            </Principal>
-            <Dependent Role="Conclusion">
-              <PropertyRef Name="InID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Internal">
           <Key>
             <PropertyRef Name="InterID" />
@@ -624,20 +446,79 @@
           <Property Name="InterSpleen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InterChest" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DInID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspect" Relationship="PrivateClinicModel.FK_Internal_Inspect" FromRole="Internal" ToRole="Inspect" />
+          <NavigationProperty Name="Inspect" Relationship="Self.FK_Internal_Inspect" FromRole="Internal" ToRole="Inspect" />
         </EntityType>
-        <Association Name="FK_Internal_Inspect">
-          <End Type="PrivateClinicModel.Inspect" Role="Inspect" Multiplicity="1" />
-          <End Type="PrivateClinicModel.Internal" Role="Internal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspect">
-              <PropertyRef Name="InID" />
-            </Principal>
-            <Dependent Role="Internal">
-              <PropertyRef Name="DInID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="KnowledgeBase">
+          <Key>
+            <PropertyRef Name="KnowID" />
+          </Key>
+          <Property Name="KnowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KnowCommon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KnowType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KnowAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KnowAdd" Type="DateTime" Precision="0" />
+          <Property Name="KnowPeople" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Marriage">
+          <Key>
+            <PropertyRef Name="MarID" />
+          </Key>
+          <Property Name="MarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarTime" Type="DateTime" Precision="0" />
+          <Property Name="MarPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarSurvey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RCusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Marriage_Customer" FromRole="Marriage" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="MedicalHistory">
+          <Key>
+            <PropertyRef Name="MedID" />
+          </Key>
+          <Property Name="MedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MedCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MedTime" Type="DateTime" Precision="0" />
+          <Property Name="MedPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MedSurvey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MCusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_MedicalHistory_Customer" FromRole="MedicalHistory" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Menstrual">
+          <Key>
+            <PropertyRef Name="MenID" />
+          </Key>
+          <Property Name="MenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenTime" Type="DateTime" Precision="0" />
+          <Property Name="MenPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenSurvey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SCusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Menstrual_Customer" FromRole="Menstrual" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Present">
+          <Key>
+            <PropertyRef Name="PreID" />
+          </Key>
+          <Property Name="PreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PreCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PreTime" Type="DateTime" Precision="0" />
+          <Property Name="PrePlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PreSurvey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PCusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Present_Customer" FromRole="Present" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="ReturnVisit">
+          <Key>
+            <PropertyRef Name="RetID" />
+          </Key>
+          <Property Name="RetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RetIsomorphism" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Resul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RetTime" Type="DateTime" Precision="0" />
+          <Property Name="RetPeople" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Surgery">
           <Key>
             <PropertyRef Name="SurID" />
@@ -653,20 +534,18 @@
           <Property Name="SurJoint" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SurOther" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SInID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspect" Relationship="PrivateClinicModel.FK_Surgery_Inspect" FromRole="Surgery" ToRole="Inspect" />
+          <NavigationProperty Name="Inspect" Relationship="Self.FK_Surgery_Inspect" FromRole="Surgery" ToRole="Inspect" />
         </EntityType>
-        <Association Name="FK_Surgery_Inspect">
-          <End Type="PrivateClinicModel.Inspect" Role="Inspect" Multiplicity="1" />
-          <End Type="PrivateClinicModel.Surgery" Role="Surgery" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspect">
-              <PropertyRef Name="InID" />
-            </Principal>
-            <Dependent Role="Surgery">
-              <PropertyRef Name="SInID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="UserInfo">
           <Key>
             <PropertyRef Name="UserID" />
@@ -681,22 +560,168 @@
           <Property Name="UserQua" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="UserRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        </Schema>
+        <Association Name="FK_Conclusion_Inspect">
+          <End Role="Inspect" Type="Self.Inspect" Multiplicity="0..1" />
+          <End Role="Conclusion" Type="Self.Conclusion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspect">
+              <PropertyRef Name="InID" />
+            </Principal>
+            <Dependent Role="Conclusion">
+              <PropertyRef Name="InID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Family_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Family" Type="Self.Family" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CusID" />
+            </Principal>
+            <Dependent Role="Family">
+              <PropertyRef Name="FCusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marriage_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Marriage" Type="Self.Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CusID" />
+            </Principal>
+            <Dependent Role="Marriage">
+              <PropertyRef Name="RCusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicalHistory_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="MedicalHistory" Type="Self.MedicalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CusID" />
+            </Principal>
+            <Dependent Role="MedicalHistory">
+              <PropertyRef Name="MCusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menstrual_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Menstrual" Type="Self.Menstrual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CusID" />
+            </Principal>
+            <Dependent Role="Menstrual">
+              <PropertyRef Name="SCusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Present_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Present" Type="Self.Present" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CusID" />
+            </Principal>
+            <Dependent Role="Present">
+              <PropertyRef Name="PCusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Internal_Inspect">
+          <End Role="Inspect" Type="Self.Inspect" Multiplicity="1" />
+          <End Role="Internal" Type="Self.Internal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspect">
+              <PropertyRef Name="InID" />
+            </Principal>
+            <Dependent Role="Internal">
+              <PropertyRef Name="DInID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Surgery_Inspect">
+          <End Role="Inspect" Type="Self.Inspect" Multiplicity="1" />
+          <End Role="Surgery" Type="Self.Surgery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspect">
+              <PropertyRef Name="InID" />
+            </Principal>
+            <Dependent Role="Surgery">
+              <PropertyRef Name="SInID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrivateClinicEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" />
+          <EntitySet Name="Conclusion" EntityType="Self.Conclusion" />
+          <EntitySet Name="Consultation" EntityType="Self.Consultation" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Family" EntityType="Self.Family" />
+          <EntitySet Name="Inspect" EntityType="Self.Inspect" />
+          <EntitySet Name="Internal" EntityType="Self.Internal" />
+          <EntitySet Name="KnowledgeBase" EntityType="Self.KnowledgeBase" />
+          <EntitySet Name="Marriage" EntityType="Self.Marriage" />
+          <EntitySet Name="MedicalHistory" EntityType="Self.MedicalHistory" />
+          <EntitySet Name="Menstrual" EntityType="Self.Menstrual" />
+          <EntitySet Name="Present" EntityType="Self.Present" />
+          <EntitySet Name="ReturnVisit" EntityType="Self.ReturnVisit" />
+          <EntitySet Name="Surgery" EntityType="Self.Surgery" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK_Conclusion_Inspect" Association="Self.FK_Conclusion_Inspect">
+            <End Role="Inspect" EntitySet="Inspect" />
+            <End Role="Conclusion" EntitySet="Conclusion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Family_Customer" Association="Self.FK_Family_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Family" EntitySet="Family" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marriage_Customer" Association="Self.FK_Marriage_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Marriage" EntitySet="Marriage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicalHistory_Customer" Association="Self.FK_MedicalHistory_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="MedicalHistory" EntitySet="MedicalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menstrual_Customer" Association="Self.FK_Menstrual_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Menstrual" EntitySet="Menstrual" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Present_Customer" Association="Self.FK_Present_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Present" EntitySet="Present" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Internal_Inspect" Association="Self.FK_Internal_Inspect">
+            <End Role="Inspect" EntitySet="Inspect" />
+            <End Role="Internal" EntitySet="Internal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Surgery_Inspect" Association="Self.FK_Surgery_Inspect">
+            <End Role="Inspect" EntitySet="Inspect" />
+            <End Role="Surgery" EntitySet="Surgery" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PrivateClinicModelStoreContainer" CdmEntityContainer="PrivateClinicEntities">
+        <EntityContainerMapping StorageEntityContainer="PrivateClinicModelStoreContainer" CdmEntityContainer="PrivateClinicEntities1">
           <EntitySetMapping Name="Appointment">
             <EntityTypeMapping TypeName="PrivateClinicModel.Appointment">
               <MappingFragment StoreEntitySet="Appointment">
-                <ScalarProperty Name="AppDD" ColumnName="AppDD" />
                 <ScalarProperty Name="AppID" ColumnName="AppID" />
                 <ScalarProperty Name="AppName" ColumnName="AppName" />
                 <ScalarProperty Name="AppDate" ColumnName="AppDate" />
                 <ScalarProperty Name="AppStart" ColumnName="AppStart" />
                 <ScalarProperty Name="AppEnd" ColumnName="AppEnd" />
                 <ScalarProperty Name="AppIsomorphism" ColumnName="AppIsomorphism" />
+                <ScalarProperty Name="AppDD" ColumnName="AppDD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -707,6 +732,137 @@
                 <ScalarProperty Name="ConConclu" ColumnName="ConConclu" />
                 <ScalarProperty Name="ConDescribe" ColumnName="ConDescribe" />
                 <ScalarProperty Name="InID" ColumnName="InID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consultation">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Consultation">
+              <MappingFragment StoreEntitySet="Consultation">
+                <ScalarProperty Name="ConsuID" ColumnName="ConsuID" />
+                <ScalarProperty Name="ConsuName" ColumnName="ConsuName" />
+                <ScalarProperty Name="ConsuContent" ColumnName="ConsuContent" />
+                <ScalarProperty Name="ConsuProposal" ColumnName="ConsuProposal" />
+                <ScalarProperty Name="ConsuTime" ColumnName="ConsuTime" />
+                <ScalarProperty Name="ConsuFill" ColumnName="ConsuFill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CusID" ColumnName="CusID" />
+                <ScalarProperty Name="CusName" ColumnName="CusName" />
+                <ScalarProperty Name="CusCard" ColumnName="CusCard" />
+                <ScalarProperty Name="CusSex" ColumnName="CusSex" />
+                <ScalarProperty Name="CusBirth" ColumnName="CusBirth" />
+                <ScalarProperty Name="CusMarriage" ColumnName="CusMarriage" />
+                <ScalarProperty Name="CusNation" ColumnName="CusNation" />
+                <ScalarProperty Name="CusAddress" ColumnName="CusAddress" />
+                <ScalarProperty Name="CusTelephone" ColumnName="CusTelephone" />
+                <ScalarProperty Name="CusOccupation" ColumnName="CusOccupation" />
+                <ScalarProperty Name="CusBloodType" ColumnName="CusBloodType" />
+                <ScalarProperty Name="CusDoctor" ColumnName="CusDoctor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Family">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Family">
+              <MappingFragment StoreEntitySet="Family">
+                <ScalarProperty Name="FamID" ColumnName="FamID" />
+                <ScalarProperty Name="FamCategory" ColumnName="FamCategory" />
+                <ScalarProperty Name="FamTime" ColumnName="FamTime" />
+                <ScalarProperty Name="FamPlace" ColumnName="FamPlace" />
+                <ScalarProperty Name="FamSurvey" ColumnName="FamSurvey" />
+                <ScalarProperty Name="FCusID" ColumnName="FCusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspect">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Inspect">
+              <MappingFragment StoreEntitySet="Inspect">
+                <ScalarProperty Name="InID" ColumnName="InID" />
+                <ScalarProperty Name="InDoctor" ColumnName="InDoctor" />
+                <ScalarProperty Name="InName" ColumnName="InName" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="ConConclu" ColumnName="ConConclu" />
+                <ScalarProperty Name="ConDescribe" ColumnName="ConDescribe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Internal">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Internal">
+              <MappingFragment StoreEntitySet="Internal">
+                <ScalarProperty Name="InterID" ColumnName="InterID" />
+                <ScalarProperty Name="InterBlood" ColumnName="InterBlood" />
+                <ScalarProperty Name="InterPulse" ColumnName="InterPulse" />
+                <ScalarProperty Name="InterHeart" ColumnName="InterHeart" />
+                <ScalarProperty Name="InterNerve" ColumnName="InterNerve" />
+                <ScalarProperty Name="InterLung" ColumnName="InterLung" />
+                <ScalarProperty Name="InterAbdomen" ColumnName="InterAbdomen" />
+                <ScalarProperty Name="InterLiver" ColumnName="InterLiver" />
+                <ScalarProperty Name="InterSpleen" ColumnName="InterSpleen" />
+                <ScalarProperty Name="InterChest" ColumnName="InterChest" />
+                <ScalarProperty Name="DInID" ColumnName="DInID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KnowledgeBase">
+            <EntityTypeMapping TypeName="PrivateClinicModel.KnowledgeBase">
+              <MappingFragment StoreEntitySet="KnowledgeBase">
+                <ScalarProperty Name="KnowID" ColumnName="KnowID" />
+                <ScalarProperty Name="KnowCommon" ColumnName="KnowCommon" />
+                <ScalarProperty Name="KnowType" ColumnName="KnowType" />
+                <ScalarProperty Name="KnowAnswer" ColumnName="KnowAnswer" />
+                <ScalarProperty Name="KnowAdd" ColumnName="KnowAdd" />
+                <ScalarProperty Name="KnowPeople" ColumnName="KnowPeople" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marriage">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Marriage">
+              <MappingFragment StoreEntitySet="Marriage">
+                <ScalarProperty Name="MarID" ColumnName="MarID" />
+                <ScalarProperty Name="MarCategory" ColumnName="MarCategory" />
+                <ScalarProperty Name="MarTime" ColumnName="MarTime" />
+                <ScalarProperty Name="MarPlace" ColumnName="MarPlace" />
+                <ScalarProperty Name="MarSurvey" ColumnName="MarSurvey" />
+                <ScalarProperty Name="RCusID" ColumnName="RCusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalHistory">
+            <EntityTypeMapping TypeName="PrivateClinicModel.MedicalHistory">
+              <MappingFragment StoreEntitySet="MedicalHistory">
+                <ScalarProperty Name="MedID" ColumnName="MedID" />
+                <ScalarProperty Name="MedCategory" ColumnName="MedCategory" />
+                <ScalarProperty Name="MedTime" ColumnName="MedTime" />
+                <ScalarProperty Name="MedPlace" ColumnName="MedPlace" />
+                <ScalarProperty Name="MedSurvey" ColumnName="MedSurvey" />
+                <ScalarProperty Name="MCusID" ColumnName="MCusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menstrual">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Menstrual">
+              <MappingFragment StoreEntitySet="Menstrual">
+                <ScalarProperty Name="MenID" ColumnName="MenID" />
+                <ScalarProperty Name="MenCategory" ColumnName="MenCategory" />
+                <ScalarProperty Name="MenTime" ColumnName="MenTime" />
+                <ScalarProperty Name="MenPlace" ColumnName="MenPlace" />
+                <ScalarProperty Name="MenSurvey" ColumnName="MenSurvey" />
+                <ScalarProperty Name="SCusID" ColumnName="SCusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Present">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Present">
+              <MappingFragment StoreEntitySet="Present">
+                <ScalarProperty Name="PreID" ColumnName="PreID" />
+                <ScalarProperty Name="PreCategory" ColumnName="PreCategory" />
+                <ScalarProperty Name="PreTime" ColumnName="PreTime" />
+                <ScalarProperty Name="PrePlace" ColumnName="PrePlace" />
+                <ScalarProperty Name="PreSurvey" ColumnName="PreSurvey" />
+                <ScalarProperty Name="PCusID" ColumnName="PCusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -723,6 +879,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Surgery">
+            <EntityTypeMapping TypeName="PrivateClinicModel.Surgery">
+              <MappingFragment StoreEntitySet="Surgery">
+                <ScalarProperty Name="SurID" ColumnName="SurID" />
+                <ScalarProperty Name="SurHeight" ColumnName="SurHeight" />
+                <ScalarProperty Name="SurBust" ColumnName="SurBust" />
+                <ScalarProperty Name="SurWeight" ColumnName="SurWeight" />
+                <ScalarProperty Name="SurFace" ColumnName="SurFace" />
+                <ScalarProperty Name="SurNeck" ColumnName="SurNeck" />
+                <ScalarProperty Name="SurSpine" ColumnName="SurSpine" />
+                <ScalarProperty Name="SurLimb" ColumnName="SurLimb" />
+                <ScalarProperty Name="SurJoint" ColumnName="SurJoint" />
+                <ScalarProperty Name="SurOther" ColumnName="SurOther" />
+                <ScalarProperty Name="SInID" ColumnName="SInID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="PrivateClinicModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -734,154 +907,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KnowledgeBase">
-            <EntityTypeMapping TypeName="PrivateClinicModel.KnowledgeBase">
-              <MappingFragment StoreEntitySet="KnowledgeBase">
-                <ScalarProperty Name="KnowPeople" ColumnName="KnowPeople" />
-                <ScalarProperty Name="KnowAdd" ColumnName="KnowAdd" />
-                <ScalarProperty Name="KnowAnswer" ColumnName="KnowAnswer" />
-                <ScalarProperty Name="KnowType" ColumnName="KnowType" />
-                <ScalarProperty Name="KnowCommon" ColumnName="KnowCommon" />
-                <ScalarProperty Name="KnowID" ColumnName="KnowID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Family">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Family">
-              <MappingFragment StoreEntitySet="Family">
-                <ScalarProperty Name="FCusID" ColumnName="FCusID" />
-                <ScalarProperty Name="FamSurvey" ColumnName="FamSurvey" />
-                <ScalarProperty Name="FamPlace" ColumnName="FamPlace" />
-                <ScalarProperty Name="FamTime" ColumnName="FamTime" />
-                <ScalarProperty Name="FamCategory" ColumnName="FamCategory" />
-                <ScalarProperty Name="FamID" ColumnName="FamID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Marriage">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Marriage">
-              <MappingFragment StoreEntitySet="Marriage">
-                <ScalarProperty Name="RCusID" ColumnName="RCusID" />
-                <ScalarProperty Name="MarSurvey" ColumnName="MarSurvey" />
-                <ScalarProperty Name="MarPlace" ColumnName="MarPlace" />
-                <ScalarProperty Name="MarTime" ColumnName="MarTime" />
-                <ScalarProperty Name="MarCategory" ColumnName="MarCategory" />
-                <ScalarProperty Name="MarID" ColumnName="MarID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Menstrual">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Menstrual">
-              <MappingFragment StoreEntitySet="Menstrual">
-                <ScalarProperty Name="SCusID" ColumnName="SCusID" />
-                <ScalarProperty Name="MenSurvey" ColumnName="MenSurvey" />
-                <ScalarProperty Name="MenPlace" ColumnName="MenPlace" />
-                <ScalarProperty Name="MenTime" ColumnName="MenTime" />
-                <ScalarProperty Name="MenCategory" ColumnName="MenCategory" />
-                <ScalarProperty Name="MenID" ColumnName="MenID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Present">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Present">
-              <MappingFragment StoreEntitySet="Present">
-                <ScalarProperty Name="PCusID" ColumnName="PCusID" />
-                <ScalarProperty Name="PreSurvey" ColumnName="PreSurvey" />
-                <ScalarProperty Name="PrePlace" ColumnName="PrePlace" />
-                <ScalarProperty Name="PreTime" ColumnName="PreTime" />
-                <ScalarProperty Name="PreCategory" ColumnName="PreCategory" />
-                <ScalarProperty Name="PreID" ColumnName="PreID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customer">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CusDoctor" ColumnName="CusDoctor" />
-                <ScalarProperty Name="CusBloodType" ColumnName="CusBloodType" />
-                <ScalarProperty Name="CusOccupation" ColumnName="CusOccupation" />
-                <ScalarProperty Name="CusTelephone" ColumnName="CusTelephone" />
-                <ScalarProperty Name="CusAddress" ColumnName="CusAddress" />
-                <ScalarProperty Name="CusNation" ColumnName="CusNation" />
-                <ScalarProperty Name="CusMarriage" ColumnName="CusMarriage" />
-                <ScalarProperty Name="CusBirth" ColumnName="CusBirth" />
-                <ScalarProperty Name="CusSex" ColumnName="CusSex" />
-                <ScalarProperty Name="CusCard" ColumnName="CusCard" />
-                <ScalarProperty Name="CusName" ColumnName="CusName" />
-                <ScalarProperty Name="CusID" ColumnName="CusID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MedicalHistory">
-            <EntityTypeMapping TypeName="PrivateClinicModel.MedicalHistory">
-              <MappingFragment StoreEntitySet="MedicalHistory">
-                <ScalarProperty Name="MCusID" ColumnName="MCusID" />
-                <ScalarProperty Name="MedSurvey" ColumnName="MedSurvey" />
-                <ScalarProperty Name="MedPlace" ColumnName="MedPlace" />
-                <ScalarProperty Name="MedTime" ColumnName="MedTime" />
-                <ScalarProperty Name="MedCategory" ColumnName="MedCategory" />
-                <ScalarProperty Name="MedID" ColumnName="MedID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Inspect">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Inspect">
-              <MappingFragment StoreEntitySet="Inspect">
-                <ScalarProperty Name="ConDescribe" ColumnName="ConDescribe" />
-                <ScalarProperty Name="ConConclu" ColumnName="ConConclu" />
-                <ScalarProperty Name="InTime" ColumnName="InTime" />
-                <ScalarProperty Name="InName" ColumnName="InName" />
-                <ScalarProperty Name="InDoctor" ColumnName="InDoctor" />
-                <ScalarProperty Name="InID" ColumnName="InID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Internal">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Internal">
-              <MappingFragment StoreEntitySet="Internal">
-                <ScalarProperty Name="DInID" ColumnName="DInID" />
-                <ScalarProperty Name="InterChest" ColumnName="InterChest" />
-                <ScalarProperty Name="InterSpleen" ColumnName="InterSpleen" />
-                <ScalarProperty Name="InterLiver" ColumnName="InterLiver" />
-                <ScalarProperty Name="InterAbdomen" ColumnName="InterAbdomen" />
-                <ScalarProperty Name="InterLung" ColumnName="InterLung" />
-                <ScalarProperty Name="InterNerve" ColumnName="InterNerve" />
-                <ScalarProperty Name="InterHeart" ColumnName="InterHeart" />
-                <ScalarProperty Name="InterPulse" ColumnName="InterPulse" />
-                <ScalarProperty Name="InterBlood" ColumnName="InterBlood" />
-                <ScalarProperty Name="InterID" ColumnName="InterID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Surgery">
-            <EntityTypeMapping TypeName="PrivateClinicModel.Surgery">
-              <MappingFragment StoreEntitySet="Surgery">
-                <ScalarProperty Name="SInID" ColumnName="SInID" />
-                <ScalarProperty Name="SurOther" ColumnName="SurOther" />
-                <ScalarProperty Name="SurJoint" ColumnName="SurJoint" />
-                <ScalarProperty Name="SurLimb" ColumnName="SurLimb" />
-                <ScalarProperty Name="SurSpine" ColumnName="SurSpine" />
-                <ScalarProperty Name="SurNeck" ColumnName="SurNeck" />
-                <ScalarProperty Name="SurFace" ColumnName="SurFace" />
-                <ScalarProperty Name="SurWeight" ColumnName="SurWeight" />
-                <ScalarProperty Name="SurBust" ColumnName="SurBust" />
-                <ScalarProperty Name="SurHeight" ColumnName="SurHeight" />
-                <ScalarProperty Name="SurID" ColumnName="SurID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserInfo">
             <EntityTypeMapping TypeName="PrivateClinicModel.UserInfo">
               <MappingFragment StoreEntitySet="UserInfo">
-                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
-                <ScalarProperty Name="UserQua" ColumnName="UserQua" />
-                <ScalarProperty Name="UserSex" ColumnName="UserSex" />
-                <ScalarProperty Name="UserBirth" ColumnName="UserBirth" />
-                <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
-                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-                <ScalarProperty Name="UserPicture" ColumnName="UserPicture" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPicture" ColumnName="UserPicture" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+                <ScalarProperty Name="UserBirth" ColumnName="UserBirth" />
+                <ScalarProperty Name="UserSex" ColumnName="UserSex" />
+                <ScalarProperty Name="UserQua" ColumnName="UserQua" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

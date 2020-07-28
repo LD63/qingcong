@@ -1,0 +1,98 @@
+﻿
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutFG.cshtml";
+}
+@using FershGreen.Models
+@model UserInfo
+<style>
+    img {
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px #44576b;
+        border-radius: 100%
+    }
+
+    .top {
+        text-align: center;
+        padding-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .out {
+        padding-right: 20px;
+        padding-bottom: 30px;
+    }
+</style>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<div style=" margin-left: 10%;">
+
+    <h1 style=" margin-left: 10%;"><a href="/User/List" style="margin-left:-120px;"><i class="layui-icon " style="font-size:30px; margin:20px; padding-top:20px;">&#xe609; </i></a>详情信息</h1>
+    
+    <br />
+               <div style="width:90%;background:#fff;" class="out">
+                   
+                   <div title="" class="top">
+                       <img id="img" src="~/images/@Model.UserPicture" />
+                   </div>
+                   <input type="hidden" name="UserID" value="@Model.UserID" />
+                   <div class="layui-form-item cent">
+                       <label class="layui-form-label">用户名</label>
+                       <div class="layui-input-block">
+                           <input type="text" name="UserLogin" readonly lay-verify="required" lay-reqtext="用户名必须填" value="@Model.UserLogin" placeholder="请输入标题" autocomplete="off" class="layui-input" ">
+                       </div>
+                   </div>
+                   <input type="hidden" name="UserPwd" value="@Model.UserPwd" />
+                   <div class="layui-form-item cent">
+                       <label class="layui-form-label">职位</label>
+                       <div class="layui-input-block">
+                           <input type="text" name="UserRole" value="@Model.UserRole" readonly autocomplete="off" class="layui-input ">
+                       </div>
+                   </div>
+                   <div class="layui-form-item cent">
+                       <label class="layui-form-label">真实姓名</label>
+                       <div class="layui-input-block">
+                           <input type="text" name="UserName" readonly value="@Model.UserName" autocomplete="off" class="layui-input">
+                       </div>
+                   </div>
+                   <input type="hidden" name="UserPwd" value="@Model.UserPwd" />
+                   <div class="layui-form-item">
+                       <label class="layui-form-label">性别</label>
+                       <div class="layui-input-block">
+                           <input type="text" name="UserName" value="@Model.UserSex" readonly class="layui-input">
+
+                       </div>
+                   </div>
+                   <div class="layui-form-item cent">
+                       <label class="layui-form-label">出生年月</label>
+                       <div class="layui-input-block">
+                           <input type="text" name="UserBirth" readonly value="@string.Format("{0:yyyy-MM-dd}",Model.UserBirth)" autocomplete="off" class="layui-input">
+                       </div>
+                   </div>
+                   <div class="layui-form-item layui-form-text">
+                       <label class="layui-form-label">自我评价</label>
+                       <div class="layui-input-block">
+                           <textarea name="UserQua" readonly class="layui-textarea">@Model.UserQua</textarea>
+                       </div>
+                   </div>
+               </div>
+
+    
+</div>
+
+<script>
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+
